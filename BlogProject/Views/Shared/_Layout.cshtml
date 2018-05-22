@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/plugins/bootstrap/bootstrap.min.css")
+    @Styles.Render("~/plugins/ionicons/ionicons.min.css")
+    @Styles.Render("~/plugins/animate-css/animate.css")
+    @Styles.Render("~/plugins/slider/slider.css")
+    @Styles.Render("~/plugins/owl-carousel/owl.carousel.css")
+    @Styles.Render("~/plugins/owl-carousel/owl.theme.css")
+    @Styles.Render("~/plugins/facncybox/jquery.fancybox.css")
+    @Styles.Render("~/css/style.css")
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top animated-header" id="top-bar">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Johns Blog of Wonder", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse main-menu">
+                @Html.Partial("_LoginPartial")
+                <ul class="nav navbar-nav navbar-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Create New", "Create", "BlogPosts")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/plugins/jQurey/jquery.min.js")
+    @Scripts.Render("~/plugins/form-validation/jquery.form.js")
+    @Scripts.Render("~/plugins/form-validation/jquery.validate.min.js")
+    @Scripts.Render("~/plugins/owl-carousel/owl.carousel.min.js")
+    @Scripts.Render("~/plugins/bootstrap/bootstrap.min.js")
+    @Scripts.Render("~/plugins/wow-js/wow.min.js")
+    @Scripts.Render("~/plugins/slider/slider.js")
+    @Scripts.Render("~/plugins/facncybox/jquery.fancybox.js")
+    @Scripts.Render("~/js/main.js")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
