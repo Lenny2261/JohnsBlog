@@ -9,16 +9,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="block">
-                    <h2>Blog with right sidebar</h2>
-                    <ol class="breadcrumb">
-                        <li>
-                            <a href="index.html">
-                                <i class="ion-ios-home"></i>
-                                Home
-                            </a>
-                        </li>
-                        <li class="active">Blog</li>
-                    </ol>
+                    <h2>Blogs</h2>
                 </div>
             </div>
         </div>
@@ -61,7 +52,7 @@
                         <td>
                             <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
                                 <div class="blog-post-image">
-                                    <a href="post-fullwidth.html"><img class="img-responsive" src="~/images/blog/post-1.jpg" alt="" /></a>
+                                    <a href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })"><img class="img-responsive" src="~/images/blog/post-1.jpg" alt="" /></a>
                                 </div>
                                 <div class="blog-content">
                                     <h2 class="blogpost-title">
@@ -75,9 +66,8 @@
                                     <p>
                                         @Html.DisplayFor(modelItem => item.body)
                                     </p>
-                                    <h5 class="btn btn-dafault btn-details">@Html.ActionLink("Details", "Details", new { slug = item.slug })</h5>
+                                    <a class="btn btn-dafault btn-details"  href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })">See More</a>
                                 </div>
-
                             </article>
                         </td>
                         @*<td>
@@ -122,23 +112,29 @@
                         </div><!-- /input-group -->
                     </form>
                 </div>
-                
+
                 <div class="recent-post widget">
                     <h3>Recent Posts</h3>
                     @{var mostRecent = Model.OrderByDescending(p => p.created);}
+                    @{var count = 0;}
                     <ul>
-                    @foreach(var item in mostRecent)
-                    {
-                        <li>
-                            @Html.ActionLink(item.title, "Details", new { slug = item.slug })
-                            <br />
-                            @Html.DisplayFor(modelItem => item.created)
-                        </li>
-                    }
+                        @foreach (var item in mostRecent)
+                        {
+                            if (count < 5)
+                            {
+                                <li>
+                                    @Html.ActionLink(item.title, "Details", new { slug = item.slug })
+                                    <br />
+                                    @Html.DisplayFor(modelItem => item.created)
+                                </li>
+                                count++;
+                            }
+                         }
                     </ul>
-
                 </div>
-
+                <div class="blog-content">
+                    <a class="btn btn-dafault btn-details" href="@Url.Action("Create", "BlogPosts")">Create Post</a>
+                </div>
             </div>
         </div>
     </div>
