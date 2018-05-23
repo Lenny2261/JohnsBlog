@@ -14,6 +14,9 @@ namespace BlogProject.Models
         }
 
         public int id { get; set; }
+        public string authorID { get; set; }
+        public string abstractBody { get; set; }
+        public string catagory { get; set; }
         public DateTimeOffset  created { get; set; }
         public DateTimeOffset? updated { get; set; }
         public string title { get; set; }
@@ -23,5 +26,6 @@ namespace BlogProject.Models
         public bool published { get; set; }
 
         public virtual ICollection<Comment> comments { get; set; }
+        public virtual ApplicationUser author { get; set; }
     }
 }

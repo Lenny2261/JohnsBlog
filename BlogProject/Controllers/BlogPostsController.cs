@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using BlogProject.Models;
 using BlogProject.Helpers;
+using Microsoft.AspNet.Identity;
+using PagedList;
 
 namespace BlogProject.Controllers
 {
@@ -16,7 +18,16 @@ namespace BlogProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
-        public ActionResult Index()
+        public ActionResult Index(int? page)
+        {
+            var blogs = from b in db.Posts select b;
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(blogs.OrderBy(b => b.created).ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult Sidebar()
         {
             return View(db.Posts.ToList());
         }
@@ -37,6 +48,7 @@ namespace BlogProject.Controllers
         }
 
         // GET: BlogPosts/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -46,8 +58,9 @@ namespace BlogProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published,catagory")] BlogPost blogPost)
         {
             if (ModelState.IsValid)
             {
@@ -64,6 +77,16 @@ namespace BlogProject.Controllers
                     return View(blogPost);
                 }
 
+                string abtractBodyText = blogPost.body;
+
+                if (blogPost.body.Length > 50)
+                {
+                    abtractBodyText = blogPost.body.Substring(0, 50 + blogPost.body.IndexOf(" "));
+                    abtractBodyText = abtractBodyText + "...";
+                }
+
+                blogPost.abstractBody = abtractBodyText;
+                blogPost.authorID = User.Identity.GetUserId();
                 blogPost.slug = slug;
                 blogPost.created = DateTimeOffset.Now;
                 db.Posts.Add(blogPost);

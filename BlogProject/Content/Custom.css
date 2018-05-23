@@ -1,0 +1,12 @@
+﻿
+.blogOverflow {
+    word-wrap: break-word;
+}
+
+.navbarHead{
+    color: black;
+}
+
+.navbarHead :hover{
+    color: dimgray;
+}

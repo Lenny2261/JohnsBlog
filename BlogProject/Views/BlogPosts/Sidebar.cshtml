@@ -1,0 +1,25 @@
+﻿@model IEnumerable<BlogProject.Models.BlogPost>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<h3>Recent Posts</h3>
+@{var mostRecent = Model.OrderByDescending(p => p.created);}
+@{var count = 0;}
+<ul>
+    @foreach (var item in mostRecent)
+    {
+        if (count < 5)
+        {
+            <li>
+                @Html.ActionLink(item.title, "Details", new { slug = item.slug })
+                <br />
+                @Html.DisplayFor(modelItem => item.created)
+            </li>
+            count++;
+        }
+    }
+</ul>
+

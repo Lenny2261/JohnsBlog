@@ -12,8 +12,7 @@
                     <h2>@Html.DisplayFor(model => model.title)</h2>
                     <div class="portfolio-meta">
                         <span>@Html.DisplayFor(model => model.created)</span>|
-                        <span> Category: typography</span>|
-                        <span> Tags: <a href="">business</a>,<a href="">people</a></span>
+                        <span> Category: @Html.DisplayFor(model => model.catagory)</span>|
                     </div>
                 </div>
             </div>
@@ -28,7 +27,7 @@
                 <div class="post-img">
                     <img class="img-responsive" alt="" src="@Html.DisplayFor(model => model.mediaURL)">
                 </div>
-                <div class="post-content">
+                <div class="post-content blogOverflow">
                     @Html.DisplayFor(model => model.body)
                 </div>
                 <div class="post-comment">
@@ -58,68 +57,73 @@
     </div>
 </section>
 @*<div>
-    <h4>BlogPost</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            
-        </dt>
+        <h4>BlogPost</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.created)
-        </dd>
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.updated)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.created)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.updated)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.updated)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.title)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.updated)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.title)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.title)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.slug)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.title)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.slug)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.slug)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.body)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.slug)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.body)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.body)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.mediaURL)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.body)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.mediaURL)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.mediaURL)
+            </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.published)
-        </dt>
+            <dd>
+                @Html.DisplayFor(model => model.mediaURL)
+            </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.published)
-        </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.published)
+            </dt>
 
-    </dl>
-</div>*@
+            <dd>
+                @Html.DisplayFor(model => model.published)
+            </dd>
+
+        </dl>
+    </div>*@
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+
+
+

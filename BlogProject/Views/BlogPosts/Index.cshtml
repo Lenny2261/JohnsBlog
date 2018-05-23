@@ -1,5 +1,6 @@
-﻿@model IEnumerable<BlogProject.Models.BlogPost>
-
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BlogProject.Models.BlogPost>
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Index";
 }
@@ -22,35 +23,35 @@
             <table class="table">
 
                 @*<tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.created)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.updated)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.title)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.slug)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.body)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.mediaURL)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.published)
-                </th>
-                <th></th>
-            </tr>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.created)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.updated)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.slug)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.body)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.mediaURL)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.published)
+                        </th>
+                        <th></th>
+                    </tr>*@
 
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td>
-                            <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
+                            <article class="wow fadeInDown blogOverflow" data-wow-delay=".3s" data-wow-duration="500ms">
                                 <div class="blog-post-image">
                                     <a href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })"><img class="img-responsive" src="~/images/blog/post-1.jpg" alt="" /></a>
                                 </div>
@@ -60,45 +61,51 @@
                                     </h2>
                                     <div class="blog-meta">
                                         <span>@Html.DisplayFor(modelItem => item.created)</span>
-                                        <span>by <a href="">Admin</a></span>
-                                        <span><a href="">business</a>,<a href="">people</a></span>
+                                        <span>by @Html.DisplayFor(modelItem => item.author.displayName)</span>
+                                        Catagory: @Html.DisplayFor(modelItem => item.catagory)
                                     </div>
-                                    <p>
-                                        @Html.DisplayFor(modelItem => item.body)
-                                    </p>
-                                    <a class="btn btn-dafault btn-details"  href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })">See More</a>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <p>
+                                                @Html.DisplayFor(modelItem => item.abstractBody)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <a class="btn btn-dafault btn-details" href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })">See More</a>
                                 </div>
                             </article>
                         </td>
                         @*<td>
 
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.updated)
-                    </td>
-                    <td>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.updated)
+                            </td>
+                            <td>
 
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.slug)
-                    </td>
-                    <td>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.slug)
+                            </td>
+                            <td>
 
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.mediaURL)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.published)
-                    </td>*@
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id=item.id })
-                    </td>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.mediaURL)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.published)
+                            </td>*@
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        </td>
                     </tr>
                 }
 
             </table>
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
         </div>
         <div class="col-md-4">
             <div class="sidebar">
@@ -114,23 +121,7 @@
                 </div>
 
                 <div class="recent-post widget">
-                    <h3>Recent Posts</h3>
-                    @{var mostRecent = Model.OrderByDescending(p => p.created);}
-                    @{var count = 0;}
-                    <ul>
-                        @foreach (var item in mostRecent)
-                        {
-                            if (count < 5)
-                            {
-                                <li>
-                                    @Html.ActionLink(item.title, "Details", new { slug = item.slug })
-                                    <br />
-                                    @Html.DisplayFor(modelItem => item.created)
-                                </li>
-                                count++;
-                            }
-                         }
-                    </ul>
+                    @Html.Action("Sidebar", "BlogPosts")
                 </div>
                 <div class="blog-content">
                     <a class="btn btn-dafault btn-details" href="@Url.Action("Create", "BlogPosts")">Create Post</a>
