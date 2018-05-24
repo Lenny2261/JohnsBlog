@@ -6,14 +6,13 @@
 }
 
 <h3>Recent Posts</h3>
-@{var mostRecent = Model.OrderByDescending(p => p.created);}
 @{var count = 0;}
 <ul>
-    @foreach (var item in mostRecent)
+    @foreach (var item in Model)
     {
         if (count < 5)
         {
-            <li>
+            <li class="abstractOverflow">
                 @Html.ActionLink(item.title, "Details", new { slug = item.slug })
                 <br />
                 @Html.DisplayFor(modelItem => item.created)

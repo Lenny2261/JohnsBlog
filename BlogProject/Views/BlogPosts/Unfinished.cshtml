@@ -40,37 +40,32 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 abstractOverflow">
-                                                    @Html.Raw(item.body)
+                                            @Html.Raw(item.body)
                                         </div>
                                     </div>
                                     <a class="btn btn-dafault btn-details" href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })">See More</a>
                                 </div>
                             </article>
                         </td>
-                        <td>
-                        </td>
+                        <td></td>
                     </tr>
                 }
 
             </table>
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter, currentSearch = ViewBag.CurrentSearch }))
+            @Html.PagedListPager(Model, page => Url.Action("Unfinished", new { page, currentFilter = ViewBag.CurrentFilter }))
         </div>
         <div class="col-md-4">
             <div class="sidebar">
                 <div class="search widget">
-                    @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get)) { 
+                    <form action="" method="get" class="searchform" role="search">
                         <div class="input-group">
-                            Search @Html.TextBox("searchString", ViewBag.CurrentSearch as string)
+                            <input type="text" class="form-control" placeholder="Search for...">
                             <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit"> <i class="ion-search"></i> </button>
+                                <button class="btn btn-default" type="button"> <i class="ion-search"></i> </button>
                             </span>
                         </div><!-- /input-group -->
-                    }
-                    </div>
-
-                <div class="recent-post widget">
-                    @Html.Action("Sidebar", "BlogPosts")
+                    </form>
                 </div>
                 <div class="categories widget">
                     <h3 class="widget-head">Categories</h3>
@@ -106,12 +101,6 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <a class="btn btn-dafault btn-details" href="@Url.Action("Index", "Categories")">Mess With Categories</a>
-                    }
-                </div>
-                <div class="blog-content">
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a class="btn btn-dafault btn-details" href="@Url.Action("Unfinished", "BlogPosts")">Unfinished Posts</a>
                     }
                 </div>
             </div>

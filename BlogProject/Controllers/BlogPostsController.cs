@@ -19,9 +19,71 @@ namespace BlogProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: BlogPosts
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string sortCat, string currentFilter, string searchString, string currentSearch)
         {
+            if(sortCat != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                sortCat = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = sortCat;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentSearch = searchString;
+
             var blogs = from b in db.Posts select b;
+
+            blogs = blogs.Where(b => b.published == true);
+
+            if (!String.IsNullOrEmpty(sortCat))
+            {
+                blogs = blogs.Where(b => b.category.categoryName == sortCat);
+            }
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                blogs = blogs.Where(b => b.title.Contains(searchString) || b.body.Contains(searchString));
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(blogs.OrderByDescending(b => b.created).ToPagedList(pageNumber, pageSize));
+        }
+
+        [Authorize(Roles = "Admin")]
+        public ActionResult Unfinished(int? page, string sortCat, string currentFilter)
+        {
+            if (sortCat != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                sortCat = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = sortCat;
+
+            var blogs = from b in db.Posts select b;
+
+            blogs = blogs.Where(b => b.published == false);
+
+            if (!String.IsNullOrEmpty(sortCat))
+            {
+                blogs = blogs.Where(b => b.category.categoryName == sortCat);
+            }
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
@@ -30,7 +92,11 @@ namespace BlogProject.Controllers
 
         public ActionResult Sidebar()
         {
-            return View(db.Posts.ToList());
+            var blogs = from b in db.Posts select b;
+
+            blogs = blogs.Where(b => b.published == true);
+
+            return View(blogs.OrderByDescending(b => b.created).ToList());
         }
 
         // GET: BlogPosts/Details/5
@@ -167,6 +233,7 @@ namespace BlogProject.Controllers
         }
 
         // GET: BlogPosts/Delete/5
+        [Authorize(Roles = "Admin")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -183,6 +250,7 @@ namespace BlogProject.Controllers
 
         // POST: BlogPosts/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
