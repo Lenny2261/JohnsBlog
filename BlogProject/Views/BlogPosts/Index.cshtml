@@ -36,10 +36,10 @@
                                     <div class="blog-meta">
                                         <span>@Html.DisplayFor(modelItem => item.created)</span>
                                         <span>by @Html.DisplayFor(modelItem => item.author.displayName)</span>
-                                        Catagory: @Html.DisplayFor(modelItem => item.catagory)
+                                        Catagory: @Html.DisplayFor(modelItem => item.category.categoryName)
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 blogOverflow">
+                                        <div class="col-md-12 abstractOverflow">
                                                     @Html.Raw(item.body)
                                         </div>
                                     </div>
@@ -73,7 +73,10 @@
                     @Html.Action("Sidebar", "BlogPosts")
                 </div>
                 <div class="blog-content">
-                    <a class="btn btn-dafault btn-details" href="@Url.Action("Create", "BlogPosts")">Create Post</a>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-dafault btn-details" href="@Url.Action("Create", "BlogPosts")">Create Post</a>
+                    }
                 </div>
             </div>
         </div>

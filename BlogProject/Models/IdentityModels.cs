@@ -45,5 +45,7 @@ namespace BlogProject.Models
 
         public DbSet<BlogPost> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
+
+        public System.Data.Entity.DbSet<BlogProject.Models.Category> Categories { get; set; }
     }
 }

@@ -26,17 +26,17 @@ namespace BlogProject.Migrations
 
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            if (!context.Users.Any(r => r.Email == "araynor@Coderfoundry.com"))
+            if (!context.Users.Any(r => r.Email == "jTwichell@Mailanator.com"))
             {
-                userManager.Create(new ApplicationUser { UserName = "araynor@Coderfoundry.com",
-                                                        Email = "araynor@Coderfoundry.com",
-                                                        firstName = "Antonio",
-                                                        lastName = "Raynor",
-                                                        displayName = "ANIVRA"
+                userManager.Create(new ApplicationUser { UserName = "jTwichell@Mailanator.com",
+                                                        Email = "jTwichell@Mailanator.com",
+                                                        firstName = "Jason",
+                                                        lastName = "Twichell",
+                                                        displayName = "JTwitchell0098"
                 }, "Abc&123!");
             }
 
-            var userId = userManager.FindByEmail("araynor@Coderfoundry.com").Id;
+            var userId = userManager.FindByEmail("jTwichell@Mailanator.com").Id;
             userManager.AddToRole(userId, "Mod");
         }
     }

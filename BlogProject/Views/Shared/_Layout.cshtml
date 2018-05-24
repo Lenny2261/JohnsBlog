@@ -20,21 +20,20 @@
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top animated-header" id="top-bar">
         <div class="container">
-            <div class="navbar-header main-menu">
+            <div class="main-menu navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Johns Blog of Wonder", "Index", "Home")
+                <h2 style="color: black; margin-top: 10px;">Johns Blog of Wonder</h2>
             </div>
             <div class="navbar-collapse collapse main-menu">
                 @Html.Partial("_LoginPartial")
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Blogs", "Index", "BlogPosts")</li>
+                    <li>@Html.ActionLink("Posts", "Index", "BlogPosts")</li>
                 </ul>
             </div>
         </div>

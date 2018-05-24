@@ -4,7 +4,8 @@
 }
 
 .abstractOverflow {
-    overflow-wrap: break-word;
+    word-break: break-all;
+    display: block;
 }
 
 .navbarHead{

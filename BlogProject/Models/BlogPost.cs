@@ -17,7 +17,7 @@ namespace BlogProject.Models
         public int id { get; set; }
         public string authorID { get; set; }
         public string abstractBody { get; set; }
-        public string catagory { get; set; }
+        public int categoryID { get; set; }
         public DateTimeOffset  created { get; set; }
         public DateTimeOffset? updated { get; set; }
         public string title { get; set; }
@@ -30,5 +30,6 @@ namespace BlogProject.Models
 
         public virtual ICollection<Comment> comments { get; set; }
         public virtual ApplicationUser author { get; set; }
+        public virtual Category category { get; set; }
     }
 }

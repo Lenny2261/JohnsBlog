@@ -48,25 +48,21 @@ namespace BlogProject.Controllers
         }
 
         // GET: BlogPosts/Create
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
-            if (User.IsInRole("Admin"))
-            {
-                return View();
-            }
-            return RedirectToAction("Index");
+           return View();
         }
 
         // POST: BlogPosts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published,catagory")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published,categoryID")] BlogPost blogPost)
         {
-            if (ModelState.IsValid && User.IsInRole("Admin"))
+            if (ModelState.IsValid)
             {
                 var slug = StringUtilities.URLFriendly(blogPost.title);
 
@@ -86,6 +82,7 @@ namespace BlogProject.Controllers
 
                 blogPost.abstractBody = abtractBodyText;
                 blogPost.authorID = User.Identity.GetUserId();
+                Convert.ToInt32(blogPost.categoryID);
                 blogPost.slug = slug;
                 blogPost.created = DateTimeOffset.Now;
                 db.Posts.Add(blogPost);
@@ -97,13 +94,9 @@ namespace BlogProject.Controllers
         }
 
         // GET: BlogPosts/Edit/5
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public ActionResult Edit(int? id)
         {
-            if(!User.IsInRole("Admin"))
-            {
-                return RedirectToAction("Index");
-            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -121,11 +114,11 @@ namespace BlogProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,catagory,created,slug,body,mediaURL,published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "id,title,categoryID,created,slug,body,mediaURL,published")] BlogPost blogPost)
         {
-            if (ModelState.IsValid && User.IsInRole("Admin"))
+            if (ModelState.IsValid)
             {
                 var slug = StringUtilities.URLFriendly(blogPost.title);
 
