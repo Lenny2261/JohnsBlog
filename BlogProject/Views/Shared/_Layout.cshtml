@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>John's Blogspot</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/plugins/bootstrap/bootstrap.min.css")
@@ -39,13 +39,13 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    @*<div class="container body-content">*@
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year John Mahoney</p>
         </footer>
-    </div>
+    @*</div>*@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -58,7 +58,11 @@
     @Scripts.Render("~/plugins/slider/slider.js")
     @Scripts.Render("~/plugins/facncybox/jquery.fancybox.js")
     @Scripts.Render("~/js/main.js")
-    @Scripts.Render("http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote.js")
+    @Scripts.Render("~/Scripts/tinymce/tinymce.min.js")
+    @Scripts.Render("~/Scripts/tinymce/jquery.tinymce.min.js")
+    <script type="text/javascript">
+        $(function () { tinymce.init({ selector: '#summernote' }); });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

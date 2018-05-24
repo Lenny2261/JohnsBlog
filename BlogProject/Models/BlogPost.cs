@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace BlogProject.Models
 {
@@ -21,6 +22,8 @@ namespace BlogProject.Models
         public DateTimeOffset? updated { get; set; }
         public string title { get; set; }
         public string slug { get; set; }
+
+        [AllowHtml]
         public string body { get; set; }
         public string mediaURL { get; set; }
         public bool published { get; set; }

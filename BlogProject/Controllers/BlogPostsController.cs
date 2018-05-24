@@ -51,7 +51,11 @@ namespace BlogProject.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return View();
+            }
+            return RedirectToAction("Index");
         }
 
         // POST: BlogPosts/Create
@@ -62,7 +66,7 @@ namespace BlogProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published,catagory")] BlogPost blogPost)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
                 var slug = StringUtilities.URLFriendly(blogPost.title);
 
@@ -79,11 +83,6 @@ namespace BlogProject.Controllers
 
                 string abtractBodyText = blogPost.body;
 
-                if (blogPost.body.Length > 50)
-                {
-                    abtractBodyText = blogPost.body.Substring(0, 50 + blogPost.body.IndexOf(" "));
-                    abtractBodyText = abtractBodyText + "...";
-                }
 
                 blogPost.abstractBody = abtractBodyText;
                 blogPost.authorID = User.Identity.GetUserId();
@@ -98,8 +97,13 @@ namespace BlogProject.Controllers
         }
 
         // GET: BlogPosts/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
+            if(!User.IsInRole("Admin"))
+            {
+                return RedirectToAction("Index");
+            }
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -109,6 +113,7 @@ namespace BlogProject.Controllers
             {
                 return HttpNotFound();
             }
+            string currentTitle = blogPost.title;
             return View(blogPost);
         }
 
@@ -116,11 +121,29 @@ namespace BlogProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,created,updated,title,slug,body,mediaURL,published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "id,title,catagory,created,slug,body,mediaURL,published")] BlogPost blogPost)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && User.IsInRole("Admin"))
             {
+                var slug = StringUtilities.URLFriendly(blogPost.title);
+
+                if (String.IsNullOrWhiteSpace(slug))
+                {
+                    ModelState.AddModelError("Title", "Invalid title");
+                    return View(blogPost);
+                }
+                if (slug != blogPost.slug && db.Posts.Any(p => p.slug == slug))
+                {
+                    ModelState.AddModelError("Title", "The title must be unique");
+                    return View(blogPost);
+                }
+
+                blogPost.updated = DateTimeOffset.Now;
+                blogPost.authorID = User.Identity.GetUserId();
+                blogPost.slug = slug;
+
                 db.Entry(blogPost).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -3,6 +3,10 @@
     word-wrap: break-word;
 }
 
+.abstractOverflow {
+    overflow-wrap: break-word;
+}
+
 .navbarHead{
     color: black;
 }

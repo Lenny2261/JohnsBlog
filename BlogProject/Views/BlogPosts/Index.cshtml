@@ -2,7 +2,7 @@
 @model PagedList.IPagedList<BlogProject.Models.BlogPost>
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Blogs";
 }
 
 <section class="global-page-header">
@@ -21,37 +21,11 @@
     <div class="container">
         <div class="col-md-8">
             <table class="table">
-
-                @*<tr>
-                        <th>
-                            @Html.DisplayNameFor(model => model.created)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.updated)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.title)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.slug)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.body)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.mediaURL)
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.published)
-                        </th>
-                        <th></th>
-                    </tr>*@
-
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td>
-                            <article class="wow fadeInDown blogOverflow" data-wow-delay=".3s" data-wow-duration="500ms">
+                            <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
                                 <div class="blog-post-image">
                                     <a href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })"><img class="img-responsive" src="~/images/blog/post-1.jpg" alt="" /></a>
                                 </div>
@@ -65,40 +39,15 @@
                                         Catagory: @Html.DisplayFor(modelItem => item.catagory)
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <p>
-                                                @Html.DisplayFor(modelItem => item.abstractBody)
-                                            </p>
+                                        <div class="col-md-12 blogOverflow">
+                                                    @Html.Raw(item.body)
                                         </div>
                                     </div>
                                     <a class="btn btn-dafault btn-details" href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })">See More</a>
                                 </div>
                             </article>
                         </td>
-                        @*<td>
-
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.updated)
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.slug)
-                            </td>
-                            <td>
-
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.mediaURL)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.published)
-                            </td>*@
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.id })
                         </td>
                     </tr>
                 }

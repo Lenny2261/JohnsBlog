@@ -19,24 +19,25 @@ namespace BlogProject.Migrations
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
 
-            if(!context.Roles.Any(r => r.Name == "Admin"))
+            if(!context.Roles.Any(r => r.Name == "Mod"))
             {
-                roleManager.Create(new IdentityRole { Name = "Admin" });
+                roleManager.Create(new IdentityRole { Name = "Mod" });
             }
 
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
 
-            if (!context.Users.Any(r => r.Email == "jmahoney2261@Mailinator.com"))
+            if (!context.Users.Any(r => r.Email == "araynor@Coderfoundry.com"))
             {
-                userManager.Create(new ApplicationUser { UserName = "jmahoney2261@Mailinator.com",
-                                                        Email = "jmahoney2261@Mailinator.com",
-                                                        firstName = "John",
-                                                        lastName = "Mahoney",
-                                                        displayName = "Lenny2261"}, "password");
+                userManager.Create(new ApplicationUser { UserName = "araynor@Coderfoundry.com",
+                                                        Email = "araynor@Coderfoundry.com",
+                                                        firstName = "Antonio",
+                                                        lastName = "Raynor",
+                                                        displayName = "ANIVRA"
+                }, "Abc&123!");
             }
 
-            var userId = userManager.FindByEmail("jmahoney2261@Mailinator.com").Id;
-            userManager.AddToRole(userId, "Admin");
+            var userId = userManager.FindByEmail("araynor@Coderfoundry.com").Id;
+            userManager.AddToRole(userId, "Mod");
         }
     }
 }
