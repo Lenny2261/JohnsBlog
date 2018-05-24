@@ -4,6 +4,7 @@
     ViewBag.Title = "Details";
 }
 
+
 <section class="global-page-header">
     <div class="container">
         <div class="row">
@@ -12,7 +13,8 @@
                     <h2>@Html.DisplayFor(model => model.title)</h2>
                     <div class="portfolio-meta">
                         <span>@Html.DisplayFor(model => model.created)</span>|
-                        <span> Category: @Html.DisplayFor(model => model.category.categoryName)</span>
+                        <span> Category: @Html.DisplayFor(model => model.category.categoryName)</span>|
+                        <span> By: @Html.DisplayFor(model => model.author.displayName)</span>
                     </div>
                 </div>
             </div>
@@ -24,8 +26,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="post-img">
-                    <img class="img-responsive" alt="" src="@Html.DisplayFor(model => model.mediaURL)">
+                <div class="post-img center-block imageBlog">
+                    <img class="img-responsive " alt="" src="@Html.DisplayFor(model => model.mediaURL)">
                 </div>
                 <div class="post-content blogOverflow">
                     @Html.Raw(Model.body)
@@ -56,10 +58,14 @@
         </div>
     </div>
 </section>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
 
 
 

@@ -15,3 +15,13 @@
 .navbarHead :hover{
     color: dimgray;
 }
+
+.imageBlog{
+    width: 70%;
+    height: 80%;
+}
+
+.imageBlog img{
+    width: 100%;
+    height: auto;
+}

@@ -10,6 +10,7 @@ using BlogProject.Models;
 using BlogProject.Helpers;
 using Microsoft.AspNet.Identity;
 using PagedList;
+using System.IO;
 
 namespace BlogProject.Controllers
 {
@@ -24,7 +25,7 @@ namespace BlogProject.Controllers
 
             int pageSize = 3;
             int pageNumber = (page ?? 1);
-            return View(blogs.OrderBy(b => b.created).ToPagedList(pageNumber, pageSize));
+            return View(blogs.OrderByDescending(b => b.created).ToPagedList(pageNumber, pageSize));
         }
 
         public ActionResult Sidebar()
@@ -60,7 +61,7 @@ namespace BlogProject.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published,categoryID")] BlogPost blogPost)
+        public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published,categoryID")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -77,8 +78,18 @@ namespace BlogProject.Controllers
                     return View(blogPost);
                 }
 
-                string abtractBodyText = blogPost.body;
+                if (ImageUploadValidator.IsWebpageFriendlyImage(image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                    blogPost.mediaURL = "/Uploads/" + fileName;
+                }
+                else
+                {
+                    blogPost.mediaURL = "/images/blog/post-1.jpg";
+                }
 
+                string abtractBodyText = blogPost.body;
 
                 blogPost.abstractBody = abtractBodyText;
                 blogPost.authorID = User.Identity.GetUserId();
@@ -116,7 +127,7 @@ namespace BlogProject.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,categoryID,created,slug,body,mediaURL,published")] BlogPost blogPost)
+        public ActionResult Edit([Bind(Include = "id,title,categoryID,created,slug,body,mediaURL,published")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -131,6 +142,17 @@ namespace BlogProject.Controllers
                 {
                     ModelState.AddModelError("Title", "The title must be unique");
                     return View(blogPost);
+                }
+
+                if (ImageUploadValidator.IsWebpageFriendlyImage(image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                    blogPost.mediaURL = "/Uploads/" + fileName;
+                }
+                else
+                {
+                    blogPost.mediaURL = blogPost.mediaURL;
                 }
 
                 blogPost.updated = DateTimeOffset.Now;
