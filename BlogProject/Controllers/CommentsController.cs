@@ -63,7 +63,7 @@ namespace BlogProject.Controllers
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return View();
+                return Json( new { Success = true });
             }
 
             ViewBag.authorID = new SelectList(db.Users, "Id", "firstName", comment.authorID);

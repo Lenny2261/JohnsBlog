@@ -51,11 +51,18 @@
                     }
                 @*</div>*@
                 <hr />
-                <div class="post-comment">
+                <div class="post-comment" id="testTap">
                     @using (Html.BeginForm())
                     {
                         @Html.HiddenFor(b => b.id);
                         @Html.Action("Create", "Comments")
+                        <div class="form-group">
+                            <div class="col-md-12 ridOfLeft">
+                                <div class="blog-content">
+                                    <button class="btn btn-dafault btn-details" id="btnSendComment" type="submit">Comment</button>
+                                </div>
+                            </div>
+                        </div>
                     }
                 </div>
             </div>
@@ -70,6 +77,23 @@
     </p>
 }
 
+@section scripts{
+    <script>
+        $('#btnSendComment').click(function(){
+
+            $.ajax({
+
+                url: '@Url.Action("Create", "Comments")',
+                type:"GET",
+                dataType: "html",
+                //data: { id: 1 },//this is as per your requirement
+                success: function (data) {
+                    $('#testTap').html(data);
+                },
+            });
+        });
+    </script>
+    }
 
 
 
