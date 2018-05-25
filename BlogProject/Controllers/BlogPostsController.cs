@@ -21,7 +21,8 @@ namespace BlogProject.Controllers
         // GET: BlogPosts
         public ActionResult Index(int? page, string sortCat, string currentFilter, string searchString, string currentSearch)
         {
-            if(sortCat != null)
+
+            if (sortCat != null)
             {
                 page = 1;
             }
@@ -38,7 +39,7 @@ namespace BlogProject.Controllers
             }
             else
             {
-                searchString = currentFilter;
+                searchString = currentSearch;
             }
 
             ViewBag.CurrentSearch = searchString;
@@ -50,6 +51,10 @@ namespace BlogProject.Controllers
             if (!String.IsNullOrEmpty(sortCat))
             {
                 blogs = blogs.Where(b => b.category.categoryName == sortCat);
+            }
+            else if (!String.IsNullOrEmpty(currentFilter))
+            {
+                blogs = blogs.Where(b => b.category.categoryName == currentFilter);
             }
 
             if (!String.IsNullOrEmpty(searchString))
