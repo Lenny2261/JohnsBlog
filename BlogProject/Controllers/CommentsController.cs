@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using BlogProject.Models;
+using Microsoft.AspNet.Identity;
 
 namespace BlogProject.Controllers
 {
@@ -15,6 +16,7 @@ namespace BlogProject.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Comments
+        [Authorize(Roles = "Admin, Mod")]
         public ActionResult Index()
         {
             var comments = db.Comments.Include(c => c.author).Include(c => c.post);
@@ -48,14 +50,20 @@ namespace BlogProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,postID,authorID,body,created,updated,updateReason")] Comment comment)
+        public ActionResult Create([Bind(Include = "id,postID,body,created")] Comment comment)
         {
             if (ModelState.IsValid)
             {
+
+                comment.created = DateTimeOffset.Now;
+                comment.authorID = User.Identity.GetUserId();
+                comment.postID = comment.id;
+
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return View();
             }
 
             ViewBag.authorID = new SelectList(db.Users, "Id", "firstName", comment.authorID);
@@ -64,6 +72,7 @@ namespace BlogProject.Controllers
         }
 
         // GET: Comments/Edit/5
+        [Authorize(Roles = "Admin, Mod")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,6 +93,7 @@ namespace BlogProject.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize(Roles = "Admin, Mod")]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,postID,authorID,body,created,updated,updateReason")] Comment comment)
         {
@@ -99,6 +109,7 @@ namespace BlogProject.Controllers
         }
 
         // GET: Comments/Delete/5
+        [Authorize(Roles = "Admin, Mod")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,6 +125,7 @@ namespace BlogProject.Controllers
         }
 
         // POST: Comments/Delete/5
+        [Authorize(Roles = "Admin, Mod")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

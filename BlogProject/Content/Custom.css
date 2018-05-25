@@ -29,3 +29,15 @@
 .ridOfTop{
     margin-top: 0 !important;
 }
+
+.searchClear{
+    float: right;
+}
+
+.textAreaLong{
+    max-width: none !important;
+}
+
+.ridOfLeft{
+    padding-left: 0;
+}

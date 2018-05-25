@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="block">
-                    <h2>Blogs</h2>
+                    <h2>Posts</h2>
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                                     <div class="blog-meta">
                                         <span>@Html.DisplayFor(modelItem => item.created)</span>
                                         <span>by @Html.DisplayFor(modelItem => item.author.displayName)</span>
-                                        Catagory: @Html.DisplayFor(modelItem => item.category.categoryName)
+                                        Category: @Html.DisplayFor(modelItem => item.category.categoryName)
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 abstractOverflow">
@@ -58,14 +58,14 @@
         </div>
         <div class="col-md-4">
             <div class="sidebar">
-                <div class="search widget">
+                <div class="widget">
                     @using (Html.BeginForm("Index", "BlogPosts", FormMethod.Get)) { 
-                        <div class="input-group">
-                            Search @Html.TextBox("searchString", ViewBag.CurrentSearch as string)
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="submit"> <i class="ion-search"></i> </button>
-                            </span>
-                        </div><!-- /input-group -->
+                    <div class="input-group">
+                        Search Posts @Html.TextBox("searchString", ViewBag.CurrentSearch as string, new { style = "width:225px" })
+                        <div class="blog-content text-right">
+                                <button class="btn btn-dafault btn-details" type="submit">Search</button>
+                        </div>
+                    </div><!-- /input-group -->
                     }
                     </div>
 
@@ -91,7 +91,7 @@
                             <a href="@Url.Action("Index", new { sortCat = "Random", currentFilter = ViewBag.CurrentFilter = "" })">Random</a>
                         </li>
                     </ul>
-                    <div class="blog-content">
+                    <div class="blog-content text-right">
                         <a class="ridOfTop btn btn-dafault btn-details" href="@Url.Action("Index", new { sortCat = ""})">Clear</a>
                     </div>
 
