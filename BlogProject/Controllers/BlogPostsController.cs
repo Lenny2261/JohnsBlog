@@ -132,7 +132,7 @@ namespace BlogProject.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "title,slug,body,mediaURL,published,categoryID")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Create([Bind(Include = "title,abstractBody,slug,body,mediaURL,published,categoryID")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
@@ -160,9 +160,6 @@ namespace BlogProject.Controllers
                     blogPost.mediaURL = "/images/blog/post-1.jpg";
                 }
 
-                string abtractBodyText = blogPost.body;
-
-                blogPost.abstractBody = abtractBodyText;
                 blogPost.authorID = User.Identity.GetUserId();
                 Convert.ToInt32(blogPost.categoryID);
                 blogPost.slug = slug;

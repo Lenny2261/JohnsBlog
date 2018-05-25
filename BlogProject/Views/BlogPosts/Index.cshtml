@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 abstractOverflow">
-                                                    @Html.Raw(item.body)
+                                                    @Html.DisplayFor(modelItem => item.abstractBody)
                                         </div>
                                     </div>
                                     <a class="btn btn-dafault btn-details" href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })">See More</a>
