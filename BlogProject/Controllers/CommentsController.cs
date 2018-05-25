@@ -56,6 +56,7 @@ namespace BlogProject.Controllers
         {
             if (ModelState.IsValid)
             {
+                var slug = db.Posts.Find(comment.id).slug;
 
                 comment.created = DateTimeOffset.Now;
                 comment.authorID = User.Identity.GetUserId();
@@ -63,7 +64,7 @@ namespace BlogProject.Controllers
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
-                return Json( new { Success = true });
+                return RedirectToAction("Details", "BlogPosts", new { slug = slug });
             }
 
             ViewBag.authorID = new SelectList(db.Users, "Id", "firstName", comment.authorID);
@@ -99,6 +100,9 @@ namespace BlogProject.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                comment.updated = DateTimeOffset.Now;
+
                 db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

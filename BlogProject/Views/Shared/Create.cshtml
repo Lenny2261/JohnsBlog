@@ -5,8 +5,6 @@
     Layout = null;
 }
 
-@Html.AntiForgeryToken()
-
 <div class="form-horizontal">
 
     <div class="form-group">
@@ -20,23 +18,5 @@
             </div>
         </div>
     </div>
-    @if (User.Identity.IsAuthenticated)
-    {
-    <div class="form-group">
-        <div class="col-md-12 ridOfLeft">
-            <div class="blog-content">
-                <button class="btn btn-dafault btn-details" id="btnSendComment" type="submit">Comment</button>
-            </div>
-        </div>
-    </div>
-    }
-    else
-    {
-    <div class="col-md-12 ridOfLeft">
-        <div class="blog-content">
-            <a class="btn btn-dafault btn-details" href="@Url.Action("Login", "Account")">Login To Comment</a>
-        </div>
-    </div>
-    }
 </div>
 

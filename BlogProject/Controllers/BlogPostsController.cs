@@ -123,6 +123,7 @@ namespace BlogProject.Controllers
         [Authorize(Roles = "Admin")]
         public ActionResult Create()
         {
+            ViewBag.categoryID = new SelectList(db.Categories, "categoryID", "categoryName");
            return View();
         }
 
@@ -195,7 +196,7 @@ namespace BlogProject.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,categoryID,created,slug,body,mediaURL,published")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "id,title,categoryID,created,slug,body,mediaURL,published,abstractBody")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {

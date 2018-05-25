@@ -66,7 +66,7 @@
                     dict.Add(5, "Random");
                     var selectList = new SelectList(dict, "Key", "Value");
                 }
-                @Html.DropDownListFor(model => model.categoryID, selectList, new { htmlAttributes = new { @class = "form-control pushDown" } })
+                @Html.DropDownList("categoryID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.categoryID, "", new { @class = "text-danger" })
             </div>
         </div>

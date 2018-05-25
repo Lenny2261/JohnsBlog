@@ -48,8 +48,8 @@
                     </p>
                     @if (User.IsInRole("Admin") || User.IsInRole("Mod"))
                     {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.id })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.id })
+                        <a class="btn btn-dafault btn-details" href="@Url.Action("Edit", "Comments", new { id = item.id })">Edit</a>
+                        <a class="btn btn-dafault btn-details" href="@Url.Action("Delete", "Comments", new { id = item.id })">Delete</a>
                     }
                     else
                     {
@@ -61,10 +61,29 @@
                 @*</div>*@
                 <hr />
                 <div class="post-comment" id="testTap">
-                    @using (Html.BeginForm())
+                    @using (Html.BeginForm("Create","Comments", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
+                        @Html.AntiForgeryToken()
                         @Html.HiddenFor(b => b.id);
                         @Html.Action("Create", "Comments")
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="form-group">
+                                <div class="col-md-12 ridOfLeft">
+                                    <div class="blog-content">
+                                        <button class="btn btn-dafault btn-details" type="submit">Comment</button>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-md-12 ridOfLeft">
+                                <div class="blog-content">
+                                    <a class="btn btn-dafault btn-details" href="@Url.Action("Login", "Account")">Login To Comment</a>
+                                </div>
+                            </div>
+                        }
                     }
                 </div>
             </div>
@@ -79,21 +98,6 @@
     </p>
 }
 
-@section scripts{
-    <script>
-        $('#btnSendComment').click(function(){
-
-            $.ajax({
-                url: '@Url.Action("Details", "BlogPosts", new { slug = Model.slug })',
-                type:"POST",
-                dataType: "html",
-                success: function (data) {
-                    $('#testTap').html(data);
-                },
-            });
-        });
-    </script>
-}
 
 
 
