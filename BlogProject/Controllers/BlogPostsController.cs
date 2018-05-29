@@ -14,6 +14,7 @@ using System.IO;
 
 namespace BlogProject.Controllers
 {
+    [RequireHttps]
     public class BlogPostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

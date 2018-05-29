@@ -13,6 +13,7 @@ using BlogProject.Models;
 namespace BlogProject.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -367,7 +368,7 @@ namespace BlogProject.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, displayName = model.DisplayName };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
