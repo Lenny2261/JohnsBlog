@@ -30,6 +30,11 @@ namespace BlogProject.Controllers
             return View();
         }
 
+        public ActionResult Thanks()
+        {
+            return View();
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Contact(ContactModel model)
@@ -55,7 +60,7 @@ namespace BlogProject.Controllers
                     SmtpServer.EnableSsl = true;
                     SmtpServer.Send(mM);
 
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Thanks");
                 }
                 catch (Exception ex)
                 {

@@ -38,9 +38,12 @@
                 @Html.LabelFor(m => m.message, new { @class = "control-label" })
                 <br />
                 @Html.TextAreaFor(m => m.message, new { @class = "form-controls", @rows = "6", @cols = "40" })
+                <br />
                 @Html.ValidationMessageFor(m => m.message)
             </div>
         </div>
-        <button class="btn btn-success btn-xlg" type="submit">Send Message</button>
+        <div class="blog-content">
+            <button class="btn btn-dafault btn-details" type="submit">Send Message</button>
+        </div>
     }
 </div>
