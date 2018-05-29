@@ -34,7 +34,8 @@
                 </div>
                 <hr />
                 @*<div class="media">*@
-                    @foreach (var item in Model.comments)
+                @{ var commentsSort = Model.comments.OrderByDescending(c => c.created);}
+                    @foreach (var item in commentsSort)
                     {
                 <div class="media-body">
                     <h4 class="media-heading">

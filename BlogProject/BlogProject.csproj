@@ -216,6 +216,7 @@
     <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ImageUploadValidator.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -273,6 +274,7 @@
     <Content Include="plugins\ionicons\fonts\ionicons.eot" />
     <Content Include="plugins\ionicons\fonts\ionicons.ttf" />
     <Content Include="plugins\ionicons\fonts\ionicons.woff" />
+    <Content Include="Private.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

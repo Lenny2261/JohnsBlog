@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MyPortfolio.Models.ContactModel
+@{
     ViewBag.Title = "Contact";
 }
 <section class="global-page-header">
@@ -12,14 +13,34 @@
         </div>
     </div>
 </section>
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="container">
+    @using (Html.BeginForm("Contact", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="col-sm-12 form-group">
+                @Html.LabelFor(m => m.name, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.name, new { @class = "form-control input-lg" })
+                @Html.ValidationMessageFor(m => m.name)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                @Html.LabelFor(m => m.email, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.email, new { @class = "form-control input-lg" })
+                @Html.ValidationMessageFor(m => m.email)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 form-group">
+                @Html.LabelFor(m => m.message, new { @class = "control-label" })
+                <br />
+                @Html.TextAreaFor(m => m.message, new { @class = "form-controls", @rows = "6", @cols = "40" })
+                @Html.ValidationMessageFor(m => m.message)
+            </div>
+        </div>
+        <button class="btn btn-success btn-xlg" type="submit">Send Message</button>
+    }
+</div>

@@ -59,7 +59,7 @@ namespace BlogProject.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                blogs = blogs.Where(b => b.title.Contains(searchString) || b.body.Contains(searchString));
+                blogs = blogs.Where(b => b.title.Contains(searchString) || b.body.Contains(searchString) || b.abstractBody.Contains(searchString) || b.comments.Select(c => c.body).Contains(searchString));
             }
 
             int pageSize = 3;
