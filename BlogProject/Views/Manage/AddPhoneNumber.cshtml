@@ -3,7 +3,17 @@
     ViewBag.Title = "Phone Number";
 }
 
-<h2>@ViewBag.Title.</h2>
+<section class="global-page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block">
+                    <h2>Add Phone Number</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 @using (Html.BeginForm("AddPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
