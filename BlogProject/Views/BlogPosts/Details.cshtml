@@ -34,37 +34,8 @@
                 </div>
                 <hr />
                 @*<div class="media">*@
-                <h3>Comments</h3>
-                <br />
-                @{ var commentsSort = Model.comments.OrderByDescending(c => c.created);}
-                    @foreach (var item in commentsSort)
-                    {
-                <div class="media-body">
-                    <h4 class="media-heading">
-                        @item.author.displayName
-                    </h4>
-                    <p class="text-muted">
-                        @item.created
-                    </p>
-                    <p>
-                        @item.body
-                    </p>
-                    @if (User.IsInRole("Admin") || User.IsInRole("Mod"))
-                    {
-                        <a class="btn btn-dafault btn-details" href="@Url.Action("Edit", "Comments", new { id = item.id })">Edit</a>
-                        <a class="btn btn-dafault btn-details" href="@Url.Action("Delete", "Comments", new { id = item.id })">Delete</a>
-                    }
-                    else
-                    {
-
-                    }
-                </div>
-                        <br />
-                    }
-                @*</div>*@
-                <hr />
                 <div class="post-comment" id="testTap">
-                    @using (Html.BeginForm("Create","Comments", FormMethod.Post, new { @class = "form-horizontal" }))
+                    @using (Html.BeginForm("Create", "Comments", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
                         @Html.HiddenFor(b => b.id);
@@ -89,6 +60,35 @@
                         }
                     }
                 </div>
+                <hr />
+                <h3>Comments</h3>
+                <br />
+                @{ var commentsSort = Model.comments.OrderByDescending(c => c.created);}
+                @foreach (var item in commentsSort)
+                {
+                    <div class="media-body">
+                        <h4 class="media-heading">
+                            @item.author.displayName
+                        </h4>
+                        <p class="text-muted">
+                            @item.created
+                        </p>
+                        <p>
+                            @item.body
+                        </p>
+                        @if (User.IsInRole("Admin") || User.IsInRole("Mod"))
+                        {
+                            <a class="btn btn-dafault btn-details" href="@Url.Action("Edit", "Comments", new { id = item.id })">Edit</a>
+                            <a class="btn btn-dafault btn-details" href="@Url.Action("Delete", "Comments", new { id = item.id })">Delete</a>
+                        }
+                        else
+                        {
+
+                        }
+                    </div>
+                    <br />
+                }
+                @*</div>*@
             </div>
         </div>
     </div>
