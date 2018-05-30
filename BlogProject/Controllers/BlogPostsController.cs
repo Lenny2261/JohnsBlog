@@ -23,6 +23,8 @@ namespace BlogProject.Controllers
         public ActionResult Index(int? page, string sortCat, string currentFilter, string searchString, string currentSearch)
         {
 
+            ViewBag.CurrentCategories = from c in db.Categories select c;
+
             if (sortCat != null)
             {
                 page = 1;
