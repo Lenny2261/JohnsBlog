@@ -56,8 +56,8 @@ namespace BlogProject
             //   consumerSecret: "");
 
             app.UseFacebookAuthentication(
-               appId: "2043459459206716",
-               appSecret: "2d1d7b468231b80a3b4563fa852654e5");
+               appId: "1825326317770533",
+               appSecret: "90b36e250bbf5ef1050af9e9c92344ef");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

@@ -465,6 +465,7 @@
     <Content Include="plugins\ionicons\fonts\ionicons.ttf" />
     <Content Include="plugins\ionicons\fonts\ionicons.woff" />
     <Content Include="Private.config" />
+    <None Include="Properties\PublishProfiles\JMBlogspot - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -617,6 +618,8 @@
     <Content Include="Scripts\tinymce\themes\modern\theme.min.js" />
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
+    <Content Include="Uploads\gsmarena_000.jpg" />
+    <Content Include="Uploads\maxresdefault.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -680,7 +683,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -716,8 +718,7 @@
           <IISUrl>https://localhost:44359/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>https://jmblogspot.azurewebsites.net/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
