@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Owin;
 using BlogProject.Models;
 using Owin.Security.Providers.LinkedIn;
+using Owin.Security.Providers.GitHub;
 
 namespace BlogProject
 {
@@ -58,6 +59,10 @@ namespace BlogProject
             app.UseFacebookAuthentication(
                appId: "1825326317770533",
                appSecret: "90b36e250bbf5ef1050af9e9c92344ef");
+
+            app.UseTwitterAuthentication("XKY18NDOm8e76KaWKv0y2xnif", "JFqXf6KgND7Ugc42wepVZvku0UF1xF3TDZbTVjSwCYlp8Ighbd");
+
+            app.UseGitHubAuthentication("dd080d48b966d29dab58", "1601bd5abb1276128a59cfcda612b96a0b928511");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

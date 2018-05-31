@@ -41,3 +41,11 @@
 .ridOfLeft{
     padding-left: 0px;
 }
+
+.sameLength{
+    width: 85px;
+}
+
+.pushLeft{
+    padding-left: 20px;
+}

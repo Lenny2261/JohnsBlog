@@ -74,7 +74,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.published, "Publish: ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <div class="checkbox">
+                <div class="checkbox pushLeft">
                     @Html.EditorFor(model => model.published)
                     @Html.ValidationMessageFor(model => model.published, "", new { @class = "text-danger" })
                 </div>
