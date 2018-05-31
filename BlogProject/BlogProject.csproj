@@ -437,6 +437,7 @@
     <Content Include="images\icons\right.png" />
     <Content Include="images\slider.jpg" />
     <Content Include="js\main.js" />
+    <Content Include="Uploads\CodingImage.jpg" />
     <Content Include="plugins\animate-css\animate.css" />
     <Content Include="plugins\bootstrap\bootstrap.min.css" />
     <Content Include="plugins\bootstrap\bootstrap.min.js" />
@@ -679,7 +680,6 @@
     <Content Include="Views\Categories\Edit.cshtml" />
     <Content Include="Views\Categories\Index.cshtml" />
     <Content Include="Views\BlogPosts\Unfinished.cshtml" />
-    <Content Include="Views\Home\Thanks.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

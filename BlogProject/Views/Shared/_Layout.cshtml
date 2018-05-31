@@ -29,7 +29,7 @@
                 <h2 style="color: black; margin-top: 10px;">Johns Blog of Wonder</h2>
             </div>
             <div class="navbar-collapse collapse main-menu">
-                @Html.Partial("_LoginPartial")
+                @Html.Action("_LoginPartial", "Account")
                 <ul class="nav navbar-nav navbar-right">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -39,11 +39,11 @@
         </div>
     </div>
     @*<div class="container body-content">*@
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year John Mahoney</p>
-        </footer>
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year John Mahoney</p>
+    </footer>
     @*</div>*@
 
     @Scripts.Render("~/bundles/jquery")
@@ -59,6 +59,7 @@
     @Scripts.Render("~/js/main.js")
     @Scripts.Render("~/Scripts/tinymce/tinymce.min.js")
     @Scripts.Render("~/Scripts/tinymce/jquery.tinymce.min.js")
+    @Scripts.Render("https://unpkg.com/sweetalert2@7.21.1/dist/sweetalert2.all.js")
     <script type="text/javascript">
         $(function () { tinymce.init({ selector: '#summernote' }); });
     </script>

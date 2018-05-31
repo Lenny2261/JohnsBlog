@@ -31,15 +31,12 @@ namespace BlogProject.Controllers
             return View();
         }
 
-        public ActionResult Thanks()
-        {
-            return View();
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Contact(ContactModel model)
         {
+            TempData["contactCheck"] = "";
             if (ModelState.IsValid)
             {
                 try
@@ -61,14 +58,18 @@ namespace BlogProject.Controllers
                     SmtpServer.EnableSsl = true;
                     SmtpServer.Send(mM);
 
-                    return RedirectToAction("Thanks");
+                    TempData["contactCheck"] = "Success";
+
+                    return RedirectToAction("Contact", "Home");
                 }
                 catch (Exception ex)
                 {
+                    TempData["contactCheck"] = "Failure";
                     Console.WriteLine("This shouldn't happen");
                 }
             }
 
+            TempData["contactCheck"] = "Failure";
             return View("Contact", model);
         }
     }

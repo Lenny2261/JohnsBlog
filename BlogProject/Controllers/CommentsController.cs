@@ -20,6 +20,7 @@ namespace BlogProject.Controllers
         [Authorize(Roles = "Admin, Mod")]
         public ActionResult Index()
         {
+            
             var comments = db.Comments.Include(c => c.author).Include(c => c.post);
             return View(comments.ToList());
         }

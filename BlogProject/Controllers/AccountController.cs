@@ -18,6 +18,7 @@ namespace BlogProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -89,6 +90,21 @@ namespace BlogProject.Controllers
                 default:
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
+            }
+        }
+
+        [AllowAnonymous]
+        public ActionResult _LoginPartial()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var id = User.Identity.GetUserId();
+                ApplicationUser model = db.Users.Where(u => u.Id == id).FirstOrDefault();
+                return View(model);
+            }
+            else
+            {
+                return View();
             }
         }
 
