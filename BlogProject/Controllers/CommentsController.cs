@@ -58,11 +58,10 @@ namespace BlogProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var slug = db.Posts.Find(comment.id).slug;
+                var slug = db.Posts.Find(comment.postID).slug;
 
                 comment.created = DateTimeOffset.Now;
                 comment.authorID = User.Identity.GetUserId();
-                comment.postID = comment.id;
 
                 db.Comments.Add(comment);
                 db.SaveChanges();
