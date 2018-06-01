@@ -38,7 +38,7 @@
                     @using (Html.BeginForm("Create", "Comments", FormMethod.Post, new { @class = "form-horizontal" }))
                     {
                         @Html.AntiForgeryToken()
-                        @Html.HiddenFor(b => b.id);
+                        @Html.Hidden("PostID", Model.id);
                         @Html.Action("Create", "Comments")
                         if (User.Identity.IsAuthenticated)
                         {
@@ -68,7 +68,7 @@
                 {
                     <div class="media-body">
                         <h4 class="media-heading">
-                            <img src="@item.author.avatar" />
+                            <img src="@item.author.avatar" style="width: 50px; height: 50px; margin-right: 10px;"/>
                             @item.author.displayName
                         </h4>
                         <p class="text-muted">

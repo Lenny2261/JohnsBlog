@@ -82,10 +82,10 @@ namespace BlogProject.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(ApplicationUser model, HttpPostedFileBase image)
+        public async Task<ActionResult> Index(ApplicationUser model, HttpPostedFileBase image)
         {
             var userId = User.Identity.GetUserId();
-            model = UserManager.FindById(userId);
+            model = db.Users.AsNoTracking().FirstOrDefault(u => u.Id == userId);
 
             if (ImageUploadValidator.IsWebpageFriendlyImage(image))
             {
@@ -100,9 +100,21 @@ namespace BlogProject.Controllers
                 model.avatar = "/Avatar/default-avatar.png";
             }
 
+            db.Users.Attach(model);
             db.Entry(model).State = EntityState.Modified;
             db.SaveChanges();
-            return View();
+
+            var viewModel = new IndexViewModel
+            {
+                HasPassword = HasPassword(),
+                currentUser = UserManager.FindById(userId),
+                PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
+                TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
+                Logins = await UserManager.GetLoginsAsync(userId),
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+            };
+
+            return View(viewModel);
         }
 
         //
