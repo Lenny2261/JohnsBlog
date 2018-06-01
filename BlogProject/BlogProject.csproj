@@ -625,6 +625,7 @@
     <Content Include="Scripts\tinymce\tinymce.js" />
     <Content Include="Scripts\tinymce\tinymce.min.js" />
     <Content Include="Uploads\gsmarena_000.jpg" />
+    <Content Include="Uploads\intel.png" />
     <Content Include="Uploads\maxresdefault.jpg" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

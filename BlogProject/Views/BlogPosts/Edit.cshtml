@@ -31,7 +31,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.title, "Title ", new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -45,7 +45,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.body, "Body: ", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.body, "Body ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextAreaFor(model => model.body, new { id = "summernote", name = "editordata", htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.body, "", new { @class = "text-danger" })
@@ -53,7 +53,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.mediaURL, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.mediaURL, "Thumbnail ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <input name="image" type="file" class="form-control" id="fileUpload" />
                 @Html.ValidationMessageFor(model => model.mediaURL, "", new { @class = "text-danger" })
@@ -77,7 +77,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.published, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.published, "Publish ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox pushLeft">
                     @Html.EditorFor(model => model.published)
