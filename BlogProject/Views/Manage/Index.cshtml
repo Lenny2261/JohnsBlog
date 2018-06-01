@@ -99,11 +99,9 @@
                 <input name="image" type="file" class="form-control" id="fileUpload" />
                 @Html.ValidationMessageFor(model => model.currentUser.avatar, "", new { @class = "text-danger" })
 
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-default" />
+                    <div class="blog-content">
+                        <button class="btn btn-dafault btn-details" type="submit">Submit</button>
                     </div>
-                </div>
             }
         </dd>
     </dl>
@@ -126,7 +124,7 @@
             swal({
                 type: 'error',
                 title: 'Oops...',
-                text: 'Something went wrong! Your avatar was not saved!',
+                text: 'Something went wrong! Your avatar was not saved (make sure you pick one)!',
             })
         }
     </script>

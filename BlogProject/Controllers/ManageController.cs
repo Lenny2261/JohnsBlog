@@ -97,7 +97,6 @@ namespace BlogProject.Controllers
             else
             {
                 TempData["avatarCheck"] = "Failure";
-                model.avatar = "/Avatar/default-avatar.png";
             }
 
             db.Users.Attach(model);

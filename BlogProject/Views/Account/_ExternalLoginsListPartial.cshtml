@@ -17,10 +17,16 @@
             @Html.AntiForgeryToken()
             <div id="socialLoginList">
                 <p>
-                    @foreach (AuthenticationDescription p in loginProviders) {
+                    @{ var count = 1;}
+                    @foreach (AuthenticationDescription p in loginProviders)
+                    {
                         <button type="submit" class="btn btn-info sameLength" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
-                        <br />
-                        <br />
+                        if (count == 3)
+                        {
+                            <br />
+                            <br />
+                        }
+                        count++;
                     }
                 </p>
             </div>

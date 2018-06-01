@@ -417,6 +417,7 @@
     <Content Include="Avatar\250px-Jacebeleren.jpg" />
     <Content Include="Avatar\default-avatar.png" />
     <Content Include="Avatar\flat,800x800,070,f.u4.jpg" />
+    <Content Include="Avatar\intel.png" />
     <Content Include="Avatar\shadow.jpeg" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -627,13 +628,7 @@
     <Content Include="Uploads\gsmarena_000.jpg" />
     <Content Include="Uploads\intel.png" />
     <Content Include="Uploads\maxresdefault.jpg" />
-    <Content Include="Web.config" />
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </Content>
+    <Content Include="Uploads\mslogo.jpg" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -688,6 +683,13 @@
     <Content Include="Views\BlogPosts\Unfinished.cshtml" />
     <Content Include="Views\Account\ResendEmailConfirmation.cshtml" />
     <Content Include="Views\Account\ConfirmationSent.cshtml" />
+    <Content Include="Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
