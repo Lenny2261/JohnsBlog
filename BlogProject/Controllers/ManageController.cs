@@ -7,6 +7,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using BlogProject.Models;
+using System.IO;
+using System.Data.Entity;
 
 namespace BlogProject.Controllers
 {
@@ -16,6 +18,7 @@ namespace BlogProject.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public ManageController()
         {
@@ -55,6 +58,7 @@ namespace BlogProject.Controllers
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
+
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
@@ -68,12 +72,37 @@ namespace BlogProject.Controllers
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
+                currentUser = UserManager.FindById(userId),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
             return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Index(ApplicationUser model, HttpPostedFileBase image)
+        {
+            var userId = User.Identity.GetUserId();
+            model = UserManager.FindById(userId);
+
+            if (ImageUploadValidator.IsWebpageFriendlyImage(image))
+            {
+                TempData["avatarCheck"] = "Success";
+                var fileName = Path.GetFileName(image.FileName);
+                image.SaveAs(Path.Combine(Server.MapPath("~/Avatar/"), fileName));
+                model.avatar = "/Avatar/" + fileName;
+            }
+            else
+            {
+                TempData["avatarCheck"] = "Failure";
+                model.avatar = "/Avatar/default-avatar.png";
+            }
+
+            db.Entry(model).State = EntityState.Modified;
+            db.SaveChanges();
+            return View();
         }
 
         //

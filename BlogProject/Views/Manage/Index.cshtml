@@ -91,5 +91,20 @@
                     }
                 }*@
         </dd>
+        <dt>Change Your Avatar: </dt>
+        <dd>
+            @using (Html.BeginForm("Index", "Manage", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+            {
+
+                <input name="image" type="file" class="form-control" id="fileUpload" />
+                @Html.ValidationMessageFor(model => model.currentUser.avatar, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            }
+        </dd>
     </dl>
 </div>

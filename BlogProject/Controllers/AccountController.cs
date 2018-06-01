@@ -168,7 +168,7 @@ namespace BlogProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, displayName = model.DisplayName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, displayName = model.DisplayName, avatar = "/Avatar/default-avatar.png"};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -384,7 +384,7 @@ namespace BlogProject.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, displayName = model.DisplayName };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, displayName = model.DisplayName, avatar = "/Avatar/default-avatar.png" };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

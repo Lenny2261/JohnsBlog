@@ -16,6 +16,7 @@ namespace BlogProject.Models
             this.blogComments = new HashSet<Comment>();
         }
 
+        public string avatar { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string displayName { get; set; }
