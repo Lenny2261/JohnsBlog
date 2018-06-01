@@ -437,6 +437,7 @@
     <Content Include="images\icons\right.png" />
     <Content Include="images\slider.jpg" />
     <Content Include="js\main.js" />
+    <Content Include="Uploads\920x1240.jpg" />
     <Content Include="Uploads\CodingImage.jpg" />
     <Content Include="plugins\animate-css\animate.css" />
     <Content Include="plugins\bootstrap\bootstrap.min.css" />
