@@ -10,12 +10,13 @@
 <ul>
     @foreach (var item in Model)
     {
+        var createdSide = item.created.ToString().Split(' ');
         if (count < 5)
         {
             <li class="abstractOverflow">
                 @Html.ActionLink(item.title, "Details", new { slug = item.slug })
                 <br />
-                @Html.DisplayFor(modelItem => item.created)
+                @createdSide[0] @createdSide[1] @createdSide[2]
             </li>
             count++;
         }

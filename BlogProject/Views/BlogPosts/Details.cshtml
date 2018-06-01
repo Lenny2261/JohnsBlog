@@ -4,6 +4,9 @@
     ViewBag.Title = "Details";
 }
 
+@{ 
+    var createdBlog = Model.created.ToString().Split(' ');
+}
 
 <section class="global-page-header">
     <div class="container">
@@ -12,7 +15,7 @@
                 <div class="block">
                     <h2 class="abstractOverflow">@Html.DisplayFor(model => model.title)</h2>
                     <div class="portfolio-meta">
-                        <span>@Html.DisplayFor(model => model.created)</span>|
+                        <span>@createdBlog[0] @createdBlog[1] @createdBlog[2]</span>|
                         <span> Category: @Html.DisplayFor(model => model.category.categoryName)</span>|
                         <span> By: @Html.DisplayFor(model => model.author.displayName)</span>
                     </div>
@@ -66,13 +69,14 @@
                 @{ var commentsSort = Model.comments.OrderByDescending(c => c.created);}
                 @foreach (var item in commentsSort)
                 {
+                    var created = item.created.ToString().Split(' ');
                     <div class="media-body">
                         <h4 class="media-heading">
                             <img src="@item.author.avatar" style="width: 50px; height: 50px; margin-right: 10px;"/>
                             @item.author.displayName
                         </h4>
                         <p class="text-muted">
-                            @item.created
+                            @created[0] @created[1] @created[2]
                         </p>
                         <p>
                             @item.body

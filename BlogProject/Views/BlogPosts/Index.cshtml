@@ -23,6 +23,7 @@
             <table class="table">
                 @foreach (var item in Model)
                 {
+                    var createdBlog = item.created.ToString().Split(' ');
                     <tr>
                         <td>
                             <article class="wow fadeInDown" data-wow-delay=".3s" data-wow-duration="500ms">
@@ -34,7 +35,7 @@
                                         <a href="@Url.Action("Details", "BlogPosts", new { slug = item.slug })">@Html.DisplayFor(modelItem => item.title)</a>
                                     </h2>
                                     <div class="blog-meta">
-                                        <span>@Html.DisplayFor(modelItem => item.created)</span>
+                                        <span>@createdBlog[0] @createdBlog[1] @createdBlog[2]</span>
                                         <span>by @Html.DisplayFor(modelItem => item.author.displayName)</span>
                                         Category: @Html.DisplayFor(modelItem => item.category.categoryName)
                                     </div>
