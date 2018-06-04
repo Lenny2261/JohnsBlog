@@ -119,6 +119,12 @@ namespace BlogProject.Controllers
             {
                 return HttpNotFound();
             }
+
+            blogPost.viewCount = blogPost.viewCount + 1;
+
+            db.Entry(blogPost).State = EntityState.Modified;
+            db.SaveChanges();
+
             return View(blogPost);
         }
 
@@ -164,6 +170,7 @@ namespace BlogProject.Controllers
                     blogPost.mediaURL = "/images/blog/post-1.jpg";
                 }
 
+                blogPost.viewCount = 0;
                 blogPost.authorID = User.Identity.GetUserId();
                 Convert.ToInt32(blogPost.categoryID);
                 blogPost.slug = slug;
@@ -199,7 +206,7 @@ namespace BlogProject.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,title,categoryID,created,slug,body,mediaURL,published,abstractBody")] BlogPost blogPost, HttpPostedFileBase image)
+        public ActionResult Edit([Bind(Include = "id,title,categoryID,created,slug,body,mediaURL,published,abstractBody,viewCount")] BlogPost blogPost, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {

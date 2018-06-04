@@ -415,6 +415,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Avatar\250px-Jacebeleren.jpg" />
+    <Content Include="Avatar\CodingImage.jpg" />
     <Content Include="Avatar\default-avatar.png" />
     <Content Include="Avatar\flat,800x800,070,f.u4.jpg" />
     <Content Include="Avatar\intel.png" />

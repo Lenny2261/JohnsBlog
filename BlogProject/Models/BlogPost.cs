@@ -22,6 +22,7 @@ namespace BlogProject.Models
         public DateTimeOffset? updated { get; set; }
         public string title { get; set; }
         public string slug { get; set; }
+        public int? viewCount { get; set; }
 
         [AllowHtml]
         public string body { get; set; }
